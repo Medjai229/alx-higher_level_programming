@@ -10,10 +10,10 @@
  */
 int check_cycle(listint_t *list)
 {
-	if (head == NULL || head->next == NULL)
-		return (0);
+	listint_t *slow = list, *fast = list;
 
-	listint_t *fast = list, *slow = list;
+	if (list == NULL || list->next == NULL)
+		return (0);
 
 	while (slow != fast)
 	{
