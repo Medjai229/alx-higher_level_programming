@@ -37,6 +37,7 @@ class Node:
             raise TypeError("next_node must be a Node object")
         self.__next_node = value
 
+
 class SinglyLinkedList:
     """initalize a singly linked list"""
 
@@ -77,5 +78,5 @@ class SinglyLinkedList:
         while tmp is not None:
             values.append(str(tmp.data))
             tmp = tmp.next_node
-        
+
         return ("\n".join(values))
