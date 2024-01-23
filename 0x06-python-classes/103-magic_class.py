@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+"""define a magic class as the bytecode"""
+
 import math
 
 
 class MagicClass:
+    """ represent a circle"""
 
     def __int__(self, radius=0):
         self.__radius = 0
