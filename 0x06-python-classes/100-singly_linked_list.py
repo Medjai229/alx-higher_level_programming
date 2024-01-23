@@ -49,26 +49,26 @@ class SinglyLinkedList:
         """
         self.__head = None
 
-        def sorted_insert(self, value):
-            """Insert a new node to the list
+    def sorted_insert(self, value):
+        """Insert a new node to the list
 
-            Args:
-                value: the new node to insert:
-            """
-            new = Node(value)
-            if self.__head is None:
-                new.next_node = None
-                self.__head == new
-            elif self.__data > value:
-                new.next_node = self.__head
-                self.__head = new
-            else:
-                tmp = self.__head
-                while (tmp.next_node is not None and
-                        tmp.next_node.data < value):
-                    tmp = tmp.next_node
-                new.next_node = tmp.next_node
-                tmp.next_node = new
+        Args:
+            value: the new node to insert:
+        """
+        new = Node(value)
+        if self.__head is None:
+            new.next_node = None
+            self.__head == new
+        elif self.__data > value:
+            new.next_node = self.__head
+            self.__head = new
+        else:
+            tmp = self.__head
+            while (tmp.next_node is not None and
+                    tmp.next_node.data < value):
+                tmp = tmp.next_node
+            new.next_node = tmp.next_node
+            tmp.next_node = new
 
     def __str__(self):
         """ defind the print() representation of a singly linked list"""
