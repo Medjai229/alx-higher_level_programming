@@ -10,7 +10,7 @@ class Rectangle:
     this is a class defination called Rectangle
     """
     number_of_instances = 0
-    print_symbol = '#'
+    print_symbol = "#"
 
     def __init__(self, width=0, height=0):
         self.width = width
@@ -78,7 +78,7 @@ class Rectangle:
 
         for i in range(self.__height):
             for j in range(self.__width):
-                ret_val += self.print_symbol
+                ret_val += str(self.print_symbol)
             if i < self.__height - 1:
                 ret_val += "\n"
 
