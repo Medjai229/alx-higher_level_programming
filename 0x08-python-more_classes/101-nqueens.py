@@ -3,6 +3,7 @@
 Program to solve n queens problem
 """
 
+
 class NQueens:
     """
     Class NQueens solves the problem nqueens by backtracking
@@ -65,7 +66,7 @@ if __name__ == "__main__":
 
     try:
         n = int(sys.argv[1])
-    except:
+    except TypeError:
         print("N must be a number")
         sys.exit(1)
 
