@@ -2,65 +2,75 @@
 """
 Program to solve n queens problem
 """
-import sys
 
-
-def is_safe(board, row, col):
+class NQueens:
     """
-    Checks if a queen can be placed safely at a given position
+    Class NQueens solves the problem nqueens by backtracking
+
+    Attributes:
+        attr1 (size): size of the grid
     """
-    for i in range(col):
-        if board[row][i] == 1:  # Check for queens in the same column
-            return False
+    def __init__(self, size):
+        """
+        Constructor of the class
 
-    # Check diagonals
-    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[i][j] == 1:
-            return False
-    for i, j in zip(range(row, len(board), 1), range(col, -1, -1)):
-        if board[i][j] == 1:
-            return False
+        Args:
+            param1 (size): size of the grid
+        """
+        self.size = size
+        self.solve()
 
-    return True
+    def solve(self):
+        """
+        Function that initializes the class
+        """
+        positions = [-1] * self.size
+        self.put_queen(positions, 0)
 
+    def put_queen(self, positions, row):
+        """
+        Function that puts the queen in a valid place
+        """
+        if row == self.size:
+            self.print_queen(positions)
+        else:
+            for col in range(self.size):
+                if self.check_queen(positions, row, col):
+                    positions[row] = col
+                    self.put_queen(positions, row + 1)
 
-def print_solution(board):
-    """Prints the solution in the required format."""
-    print([[i, row.index(1)] for i, row in enumerate(board)])
+    def check_queen(self, positions, row, col):
+        """
+        Function that checks if a given position is in a valid place
+        """
+        for i in range(row):
+            if positions[i] == col or \
+               positions[i] - i == col - row or \
+               positions[i] + i == col + row:
+                return False
+        return True
 
-
-def solve_n_queens_util(board, col):
-    """Recursively solves the N queens problem using backtracking."""
-    if col >= len(board):
-        print_solution(board)  # Print the solution
-        return
-
-    for i in range(len(board)):
-        if is_safe(board, i, col):
-            board[i][col] = 1
-            solve_n_queens_util(board, col + 1)
-            board[i][col] = 0  # Backtrack
-
-
-def solve_n_queens(N):
-    """Initializes the board and calls the recursive solver."""
-    board = [[0 for _ in range(N)] for _ in range(N)]
-    solve_n_queens_util(board, 0)
+    def print_queen(self, positions):
+        """
+        Function that prints the array of nqueen proble
+        """
+        print([[i, positions[i]] for i in range(self.size)])
 
 
 if __name__ == "__main__":
+    import sys
     if len(sys.argv) != 2:
-        print("Usage: nqueens N", file=sys.stderr)
+        print("Usage: nqueens N")
         sys.exit(1)
 
     try:
-        N = int(sys.argv[1])
-    except ValueError:
-        print("N must be a number", file=sys.stderr)
+        n = int(sys.argv[1])
+    except:
+        print("N must be a number")
         sys.exit(1)
 
-    if N < 4:
-        print("N must be at least 4", file=sys.stderr)
+    if int(sys.argv[1]) < 4:
+        print("N must be at least 4")
         sys.exit(1)
 
-    solve_n_queens(N)
+    NQueens(int(sys.argv[1]))
