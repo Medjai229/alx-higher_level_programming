@@ -1,16 +1,8 @@
-====================================================================
-                                                                   =
-Generating Test Cases for ``1-my_list`` module.                    =
-                                                                   =
-====================================================================
+The ``1-my_list`` module
+============================
 
-====================================================================
-                                                                   =
-File: 1-my_list.txt                                                =
-Desc: This file contains most possible edge cases for the ``1-my   =
-      _list`` module including docstrings, checking super class,   =
-      and test the method ``print_sorted``.                        =
-====================================================================
+Using ``1-mylist``
+---------------------
 
 Import function from module:
     >>> MyList = __import__('1-my_list').MyList
