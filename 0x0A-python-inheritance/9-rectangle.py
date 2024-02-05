@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-File: 8-rectangle.py
+File: 9-rectangle.py
 Description: This module contains a subclass Rectangle
 """
 BaseGeometry = __import__('7-base_geometry').BaseGeometry
