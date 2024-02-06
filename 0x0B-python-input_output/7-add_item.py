@@ -9,12 +9,12 @@ import sys
 save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
 load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
-av = list(sys.argv[1:])
+arg_v = list(sys.argv[1:])
 
 try:
     file_content = load_from_json_file('add_item.json')
 except FileNotFoundError:
     file_content = []
 
-file_content.append(av)
+file_content.append(arg_v)
 save_to_json_file(file_content, 'add_item.json')
