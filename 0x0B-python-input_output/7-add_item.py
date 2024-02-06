@@ -13,7 +13,7 @@ av = list(sys.argv[1:])
 
 try:
     file_content = load_from_json_file('add_item.json')
-except Exception:
+except FileNotFoundError:
     file_content = []
 
 file_content.append(av)
