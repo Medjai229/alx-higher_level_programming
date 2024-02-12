@@ -5,6 +5,7 @@ File: base.py
 Description: this module contains one class Base
 """
 from json import dumps, loads
+import csv
 
 
 class Base:
@@ -79,6 +80,46 @@ class Base:
         try:
             with open(filename, "r") as f:
                 list_dicts = cls.from_json_string(f.read())
+                return [cls.create(**dictionary) for dictionary in list_dicts]
+        except IOError:
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+        this method serializes into a csv file
+        """
+        filename = f"{cls.__name__}.csv"
+
+        with open(filename, "w", newline="") as csv_file:
+            if list_objs is None or list_objs == []:
+                csv_file.write("[]")
+            else:
+                if cls.__name__ == "Sqaure":
+                    fieldnames = ["id", "size", "x", "y"]
+                else:
+                    fieldnames = ["id", "width", "height", "x", "y"]
+
+                csv_write = csv.DictWriter(csv_file, fieldnames=fieldnames)
+                for obj in list_objs:
+                    csv_write.writerow(obj.to_dictionary())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+        this method deserializes a csv file
+        """
+        filename = f"{cls.__name__}.csv"
+        try:
+            with open(filename, "r", newline="") as csv_file:
+                if cls.__name__ == "Sqaure":
+                    fieldnames = ["id", "size", "x", "y"]
+                else:
+                    filednames = ["id", "width", "height", "x", "y"]
+                list_dicts = csv.DictReader(csv_file, filednames=filednames)
+                list_dicts = [dict([key, int(value)] for key, value in dic.items())
+                                for dic in list_dicts]
+
                 return [cls.create(**dictionary) for dictionary in list_dicts]
         except IOError:
             return []
