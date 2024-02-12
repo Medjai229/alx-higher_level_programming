@@ -90,19 +90,17 @@ class Base:
         this method serializes into a csv file
         """
         filename = f"{cls.__name__}.csv"
-
-        with open(filename, "w", newline="") as csv_file:
+        with open(filename, "w", newline="") as csvfile:
             if list_objs is None or list_objs == []:
-                csv_file.write("[]")
+                csvfile.write("[]")
             else:
-                if cls.__name__ == "Sqaure":
-                    fieldnames = ["id", "size", "x", "y"]
-                else:
+                if cls.__name__ == "Rectangle":
                     fieldnames = ["id", "width", "height", "x", "y"]
-
-                csv_write = csv.DictWriter(csv_file, fieldnames=fieldnames)
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 for obj in list_objs:
-                    csv_write.writerow(obj.to_dictionary())
+                    writer.writerow(obj.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
