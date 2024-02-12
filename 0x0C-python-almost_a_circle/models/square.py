@@ -37,6 +37,6 @@ class Square(Rectangle):
         """
         the string representation of the square class
         """
-        s = "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y
-                , self.size)
+        s = "[Square] ({}) {}/{} - {}".format(
+                self.id, self.x, self.y, self.size)
         return s
