@@ -90,17 +90,18 @@ class Base:
         this method serializes into a csv file
         """
         filename = f"{cls.__name__}.csv"
-        with open(filename, "w", newline="") as csvfile:
+        with open(filename, "w", newline="") as csv_file:
             if list_objs is None or list_objs == []:
-                csvfile.write("[]")
+                csv_file.write("[]")
             else:
-                if cls.__name__ == "Rectangle":
-                    fieldnames = ["id", "width", "height", "x", "y"]
-                else:
+                if cls.__name__ == "Sqaure":
                     fieldnames = ["id", "size", "x", "y"]
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                else:
+                    fieldnames = ["id", "width", "height", "x", "y"]
+
+                csv_write = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 for obj in list_objs:
-                    writer.writerow(obj.to_dictionary())
+                    csv_write.writerow(obj.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
@@ -108,18 +109,15 @@ class Base:
         this method deserializes a csv file
         """
         filename = f"{cls.__name__}.csv"
-        try:
-            with open(filename, "r", newline="") as csv_file:
-                if cls.__name__ == "Sqaure":
-                    fieldnames = ["id", "size", "x", "y"]
-                else:
+	try:
+            with open(filename, "r", newline="") as csvfile:
+                if cls.__name__ == "Rectangle":
                     fieldnames = ["id", "width", "height", "x", "y"]
-                list_dicts = csv.DictReader(csv_file, fieldnames=fieldnames)
-                list_dicts = [
-                        dict([k, int(v)] for k, v in d.items())
-                        for d in list_dicts
-                        ]
-
-                return [cls.create(**dictionary) for dictionary in list_dicts]
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
+                list_dicts = [dict([k, int(v)] for k, v in d.items())
+                              for d in list_dicts]
+                return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
