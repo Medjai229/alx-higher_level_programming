@@ -128,42 +128,35 @@ class Base:
     @staticmethod
     def draw(list_rectangles, list_squares):
         """
-        Draw all the Rectangles and Squares using Turtle graphics.
-
-        Args:
-        -   list_rectangles (list): A list of Rectangle instances.
-        -   list_squares (list): A list of Square instances.
+        this method opens a window and draws all the Rectangles and Squares
         """
-        # Create a turtle screen
-        screen = turtle.Screen()
-        screen.bgcolor("white")
+        my_turtle = turtle.Turtle()
+        my_turtle.screen.bgcolor("#000000")
+        my_turtle.pensize(4)
+        my_turtle.shape("turtle")
 
-        # Create a turtle object
-        painter = turtle.Turtle()
-        painter.speed(1)
-        painter.pensize(2)
-        # draw the squares
+        my_turtle.color("#0000FF")
+        for rec in list_rectangles:
+            my_turtle.showturtle()
+            my_turtle.up()
+            my_turtle.goto(rec.x, rec.y)
+            my_turtle.down()
+            for i in range(2):
+                my_turtle.forward(rec.width)
+                my_turtle.left(90)
+                my_turtle.forward(rec.height)
+                my_turtle.left(90)
+            my_turtle.hideturtle()
+
+        my_turtle.color("FF0000")
         for sq in list_squares:
-            print(sq)
-            painter.color("red")
-            painter.penup()
-            painter.goto(sq.x, sq.y)
-            painter.pendown()
-            for _ in range(4):
-                painter.forward(sq.size)
-                painter.left(90)
-
-        # draw the rectangles
-        for rect in list_rectangles:
-            print(rect)
-            painter.penup()
-            painter.goto(rect.x, rect.y)
-            painter.pendown()
-            for _ in range(2):
-                painter.color("indigo")
-                painter.forward(rect.width)
-                painter.left(90)
-                painter.forward(rect.height)
-                painter.left(90)
-
-        screen.exitonclick()
+            my_turtle.showturtle()
+            my_turtle.up()
+            my_turtle.goto(sq.x, sq.y)
+            my_turtle.down()
+            for i in range(2):
+                my_turtle.forward(sq.width)
+                my_turtle.left(90)
+                my_turtle.forward(sq.height)
+                my_turtle.left(90)
+            my_turtle.hideturtle()

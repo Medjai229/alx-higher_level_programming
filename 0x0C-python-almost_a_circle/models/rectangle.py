@@ -123,8 +123,8 @@ class Rectangle(Base):
         """
         the string representation of the rectangle class
         """
-        s = "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.__x, self.__y
-                , self.__width, self.__height)
+        s = "[Rectangle] ({}) {}/{} - {}/{}".format(
+                self.id, self.__x, self.__y, self.__width, self.__height)
         return s
 
     def update(self, *args, **kwargs):
