@@ -107,7 +107,7 @@ class Base:
     def load_from_file_csv(cls):
         """
         this method deserializes a csv file
-        """
+        
         filename = f"{cls.__name__}.csv"
         try:
             with open(filename, "r", newline="") as csv_file:
@@ -118,3 +118,4 @@ class Base:
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
+        """
