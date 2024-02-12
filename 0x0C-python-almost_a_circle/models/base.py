@@ -8,6 +8,7 @@ from json import dumps, loads
 import csv
 import turtle
 
+
 class Base:
     """
     This class will be the “base” of all other classes in this project
