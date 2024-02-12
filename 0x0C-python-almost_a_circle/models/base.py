@@ -6,7 +6,7 @@ Description: this module contains one class Base
 """
 from json import dumps, loads
 import csv
-
+import turtle
 
 class Base:
     """
@@ -107,15 +107,22 @@ class Base:
     def load_from_file_csv(cls):
         """
         this method deserializes a csv file
-        
+        """
         filename = f"{cls.__name__}.csv"
+
         try:
-            with open(filename, "r", newline="") as csv_file:
+            with open(filename, 'r', newline='') as f:
                 list_dicts = [
-                        {str(key): int(value) for key, value in d.items()}
-                        for d in csv.DictReader(csv_file)
-                        ]
-                return [cls.create(**d) for d in list_dicts]
+                    {str(key): int(value) for key, value in _dict.items()}
+                    for _dict in csv.DictReader(f)
+                ]
+                return [cls.create(**_dict) for _dict in list_dicts]
         except IOError:
             return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
         """
+        this method opens a window and draws all the Rectangles and Squares
+        """
+        
