@@ -115,8 +115,8 @@ class Base:
                 if cls.__name__ == "Sqaure":
                     fieldnames = ["id", "size", "x", "y"]
                 else:
-                    filednames = ["id", "width", "height", "x", "y"]
-                list_dicts = csv.DictReader(csv_file, filednames=filednames)
+                    fieldnames = ["id", "width", "height", "x", "y"]
+                list_dicts = csv.DictReader(csv_file, fieldnames=fieldnames)
                 list_dicts = [
                         dict([k, int(v)] for k, v in d.items())
                         for d in list_dicts
