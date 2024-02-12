@@ -117,8 +117,10 @@ class Base:
                 else:
                     filednames = ["id", "width", "height", "x", "y"]
                 list_dicts = csv.DictReader(csv_file, filednames=filednames)
-                list_dicts = [dict([key, int(value)] for key, value in dic.items())
-                                for dic in list_dicts]
+                list_dicts = [
+                        dict([k, int(v)] for k, v in d.items())
+                        for d in list_dicts
+                        ]
 
                 return [cls.create(**dictionary) for dictionary in list_dicts]
         except IOError:
