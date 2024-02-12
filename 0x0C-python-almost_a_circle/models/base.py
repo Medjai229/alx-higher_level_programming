@@ -87,43 +87,40 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """
-        this method serializes into a csv file
-        """
-        filename = f"{cls.__name__}.csv"
-        with open(filename, "w", newline="") as csv_file:
-            if list_objs is None or list_objs == []:
-                csv_file.write("[]")
+        '''Saves object to csv file.'''
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if list_objs is not None:
+            if cls is Rectangle:
+                list_objs = [[o.id, o.width, o.height, o.x, o.y]
+                             for o in list_objs]
             else:
-                if cls.__name__ == "Sqaure":
-                    fieldnames = ["id", "size", "x", "y"]
-                else:
-                    fieldnames = ["id", "width", "height", "x", "y"]
-
-                csv_write = csv.DictWriter(csv_file, fieldnames=fieldnames)
-                for obj in list_objs:
-                    csv_write.writerow(obj.to_dictionary())
+                list_objs = [[o.id, o.size, o.x, o.y]
+                             for o in list_objs]
+        with open('{}.csv'.format(cls.__name__), 'w', newline='',
+                  encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerows(list_objs)
 
     @classmethod
     def load_from_file_csv(cls):
-        """
-        This method returns a list of classes instantiated from a CSV file
-        """
-        filename = cls.__name__ + ".csv"
-        try:
-            with open(filename, "r", newline="") as csvfile:
-                if cls.__name__ == "Rectangle":
-                    fieldnames = ["id", "width", "height", "x", "y"]
+        '''Loads object to csv file.'''
+        from models.rectangle import Rectangle
+        from models.square import Square
+        ret = []
+        with open('{}.csv'.format(cls.__name__), 'r', newline='',
+                  encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                row = [int(r) for r in row]
+                if cls is Rectangle:
+                    d = {"id": row[0], "width": row[1], "height": row[2],
+                         "x": row[3], "y": row[4]}
                 else:
-                    fieldnames = ["id", "size", "x", "y"]
-                list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
-                list_dicts = [
-                        dict([k, int(v)] for k, v in d.items())
-                        for d in list_dicts
-                        ]
-                return [cls.create(**d) for d in list_dicts]
-        except IOError:
-            return []
+                    d = {"id": row[0], "size": row[1],
+                         "x": row[2], "y": row[3]}
+                ret.append(cls.create(**d))
+        return ret
 
     @staticmethod
     def draw(list_rectangles, list_squares):
