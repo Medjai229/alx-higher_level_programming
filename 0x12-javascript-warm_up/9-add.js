@@ -1,8 +1,8 @@
 #!/usr/bin/node
 
 function add(a, b) {
-	numAdd = a + b;
-	console.log(numAdd);
+  const numAdd = a + b;
+  console.log(numAdd);
 }
 
 const argv = process.argv;
