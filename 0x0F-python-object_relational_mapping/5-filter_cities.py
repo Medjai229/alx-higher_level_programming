@@ -25,5 +25,5 @@ if __name__ == "__main__":
     cur.execute(query, (name_pattern,))
     rows = cur.fetchall()
 
-    for row in rows:
-        print(row)
+    cities = [row[1] for row in rows]
+    print (", ".join(cities))
