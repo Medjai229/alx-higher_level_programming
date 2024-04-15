@@ -26,4 +26,4 @@ if __name__ == "__main__":
     rows = cur.fetchall()
 
     cities = [row[1] for row in rows]
-    print (", ".join(cities))
+    print(", ".join(cities))
