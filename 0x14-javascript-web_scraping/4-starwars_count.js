@@ -2,7 +2,7 @@
 
 const request = require('request');
 request(process.argv[2], function (err, response, body) {
-  if (err == null) {
+  if (err === null) {
     let count = 0;
     const jsonData = JSON.parse(body).results;
     for (const film in jsonData) {
